@@ -6,7 +6,9 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -16,9 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.porush.composebottomsheet.ui.theme.utils.clipTopCorners
+import com.porush.composebottomsheet.ui.theme.utils.TopRoundedCornerShape
 
 /**
  * @author Porush Tyagi
@@ -51,11 +54,18 @@ fun BottomSheet(
             ) {
                 Column(
                     modifier = modifier
-                        .animateContentSize()
-                        .background(Color.White)
-                        .clipTopCorners(20.dp, Color.LightGray)
                         .fillMaxWidth()
-                        .height(250.dp),
+                        .height(250.dp)
+                        .animateContentSize()
+                        .clip(shape = RoundedCornerShape(16.dp))
+                        .border(shape = TopRoundedCornerShape(
+                            cornerRadius = with(LocalDensity.current) { 32.dp.toPx() }
+                        ),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = Color.LightGray
+                            ))
+                        .background(color = Color.White),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
